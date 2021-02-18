@@ -44,7 +44,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     QQ: { type: String, required: true },
     // QQ小程序的openid 非unionid 通过云函数获取
-    qOpenid: { type: String, unique: true},
+    qOpenid: { type: String },
     lastLogon: { type: Date },
     regDate: { type: Date, required: true }
 }))
