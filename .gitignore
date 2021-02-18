@@ -63,6 +63,10 @@ typings/
 # SECRET
 keys.js
 
+# macOS file
+.DS_Store
+
 # static files
 files
 public/avatars
+

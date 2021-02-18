@@ -36,3 +36,12 @@ post {{url}}/login
 get {{url}}/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDEyNDFlMTAwMTBhYTZjMjAwZGFkNzIiLCJpYXQiOjE2MTE4NDgxODl9.V18QGmMOzVGJaYe3LdyoXykkYFgjJ2mvHGo5x_Gehyw
 
+### 绑定小程序openid
+post {{url}}/bindqopenid
+{{json}}
+
+{
+    "username": "colour93",
+    "password": "Aizaijixu789",
+    "openid": "123411115678"
+}

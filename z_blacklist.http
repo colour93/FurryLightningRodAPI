@@ -1,4 +1,4 @@
-@url=http://api.furrylightningrod.com:30001/api
+@url=https://api.furrylightningrod.com:29999/api
 
 @json=Content-Type: application/json
 
@@ -12,7 +12,7 @@ post {{url}}/list
 {{json}}
 
 {
-    "QQ": "1914644780"
+    "QQ": "1111111914644780"
 }
 
 ### 加黑名单

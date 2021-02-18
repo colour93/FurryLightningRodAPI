@@ -8,6 +8,7 @@ const dbConnect = function() {
     mongoose.connect(uri, {
         useNewUrlParser: true,
         useCreateIndex: true,
+        useFindAndModify: false
         //useUnifiedTopology: true
     }, function(err){
         if(err){
@@ -42,6 +43,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     group: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     QQ: { type: String, required: true },
+    // QQ小程序的openid 非unionid 通过云函数获取
+    qOpenid: { type: String, unique: true},
     lastLogon: { type: Date },
     regDate: { type: Date, required: true }
 }))

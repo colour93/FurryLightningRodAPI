@@ -29,6 +29,7 @@ const register = async(req, res) => {
         group: 'normal',
         email: req.body.email,
         QQ: req.body.QQ,
+        qOpenid: '',
         regDate: new Date()
     })
     // token
@@ -59,9 +60,8 @@ const add = (async(req,res) => {
     res.send(user)
 })
 
-// 登录
-const login = (async(req,res) => {
-    console.log(req.body)
+// 登录 (用户名密码核验函数 返回user json)
+const loginVerify = (async(req,res,type) => {
     const user = await User.findOne({
         username: req.body.username
     })
@@ -79,14 +79,28 @@ const login = (async(req,res) => {
             message: '用户名或密码不正确'
         })
     }
+    res.status(200)
+    return user
+})
+
+// 登录
+const login = (async(req,res) => {
+    console.log(req.body)
+    const user = await loginVerify(req,res)
+    if(!user.username){return}
     // token
     const token = jwt.sign({
-        _id: String(user._id),
+        _id: user._id
     }, config.SECRET)
     res.send({
         user,
         token
     })
+})
+
+// 通过小程序登录
+const qlogin = (async(req, res) => {
+    
 })
 
 // 更新用户信息
@@ -106,7 +120,7 @@ const update = async(req, res) => {
         })
     }else{
         updateUser = await User.findOneAndUpdate({
-            _id:req.user._id
+            _id: req.user._id
         },{
             username: nuser.username,
             nick: nuser.nick,
@@ -118,6 +132,22 @@ const update = async(req, res) => {
     }
     res.send(updateUser)
 }
+
+// 绑定QQ小程序openid
+const bindQOpenId = (async(req, res) => {
+    console.log(req.body)
+    const user = await loginVerify(req,res,'q')
+    if(!user.username){return}
+    const openid = req.body.openid
+    updateOpenid = await User.findOneAndUpdate({
+        _id: user._id
+    },{
+        qOpenid: openid
+    },{
+        new: true
+    })
+    res.send(updateOpenid)
+})
 
 // 删除
 const clear = (async(req,res) => {
@@ -133,6 +163,8 @@ module.exports = {
     register,
     add,
     login,
+    qlogin,
     update,
+    bindQOpenId,
     clear
 }

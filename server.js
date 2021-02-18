@@ -61,6 +61,9 @@ app.post('/api/register', middle.reg, async(req, res) => {
 // 登录
 app.post('/api/login', userCtrl.login)
 
+// 小程序登录
+app.post('/api/login/q', userCtrl.qlogin)
+
 // GET用户资料
 app.get('/api/profile', middle.auth, async(req, res) => {
     res.send(req.user)
@@ -74,6 +77,9 @@ app.post('/api/upload/avatar', uploadAvatar.upload)
 app.post('/api/profile/update', middle.authx, async(req, res) => {
     userCtrl.update(req, res)
 })
+
+// 通过小程序的云函数绑定QQ的openid
+app.post('/api/bindqopenid', userCtrl.bindQOpenId)
 
 // 删除所有用户
 // app.delete('/api/delete', userCtrl.clear)
